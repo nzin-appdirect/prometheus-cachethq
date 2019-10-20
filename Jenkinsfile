@@ -13,7 +13,7 @@ pipeline {
         stage('Define Version') {
             steps {
                 script {
-                    version = "1.1.1"
+                    version = "1.1.2"
                 }
             }
         }

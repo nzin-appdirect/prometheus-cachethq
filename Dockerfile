@@ -10,8 +10,15 @@ RUN set -x && \
 
 FROM alpine:3.7
 RUN apk add --no-cache ca-certificates
-WORKDIR /root/
+RUN mkdir /app
+WORKDIR /app/
+
 COPY --from=builder /go/src/github.com/nzin/prometheus-cachethq/prometheus-cachethq .
+
+RUN addgroup -g 1000 cachet && \
+    adduser -S -u 1000 -g cachet cachet
+
+USER cachet
 
 #ENV PROMETHEUS_TOKEN
 #ENV CACHETHQ_URL
